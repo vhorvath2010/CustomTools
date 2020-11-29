@@ -1,0 +1,29 @@
+preset-tools:
+    inventory:
+        lore:
+            - 'Send blocks straight to your inventory!'
+    smelters:
+        lore:
+            - 'Automatically smelts blocks!'
+        smelts:
+            COBBLESTONE: STONE
+            IRON_ORE: IRON_INGOT
+            GOLD_ORE: GOLD_INGOT
+        fortune:
+            - 'IRON_INGOT'
+            - 'GOLD_INGOT'
+    lumber:
+        lore:
+            - 'Deforest the world!'
+        delay: 1
+        effective:
+            - 'OAK_LOG'
+            - 'SPRUCE_LOG'
+            - 'BIRCH_LOG'
+            - 'JUNGLE_LOG'
+            - 'ACACIA_LOG'
+            - 'DARK_OAK_LOG'
+    Explosive:
+        lore:
+            - 'It goes boom!'
+custom-tools:
