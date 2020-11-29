@@ -1,8 +1,6 @@
 package com.vhbob.customtools;
 
-import com.vhbob.customtools.events.InvPickEvents;
-import com.vhbob.customtools.events.LumberEvents;
-import com.vhbob.customtools.events.SmeltPickEvents;
+import com.vhbob.customtools.events.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,10 +10,16 @@ public class CustomTools extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        // Enable PlaceholderAPI
+        if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            throw new RuntimeException("Could not find PlaceholderAPI!!! Plugin can not work without it!");
+        }
         // Register Events
         Bukkit.getPluginManager().registerEvents(new InvPickEvents(), this);
         Bukkit.getPluginManager().registerEvents(new SmeltPickEvents(), this);
         Bukkit.getPluginManager().registerEvents(new LumberEvents(), this);
+        Bukkit.getPluginManager().registerEvents(new ExplosiveEvents(), this);
+        Bukkit.getPluginManager().registerEvents(new BountifulEvents(), this);
         plugin = this;
     }
 

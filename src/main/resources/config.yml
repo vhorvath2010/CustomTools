@@ -15,7 +15,7 @@ preset-tools:
     lumber:
         lore:
             - 'Deforest the world!'
-        delay: 1
+        delay: 2
         effective:
             - 'OAK_LOG'
             - 'SPRUCE_LOG'
@@ -23,7 +23,17 @@ preset-tools:
             - 'JUNGLE_LOG'
             - 'ACACIA_LOG'
             - 'DARK_OAK_LOG'
-    Explosive:
+    explosive:
         lore:
             - 'It goes boom!'
+    bountiful:
+        lore:
+            - 'Harvest more ores!'
+            - 'May break value blocks'
+        degrade-chance: 40
+        trigger:
+            - 'STONE'
+        value:
+            - 'EMERALD_ORE'
+            - 'DIAMOND_ORE'
 custom-tools:
