@@ -14,12 +14,14 @@ public class CustomTools extends JavaPlugin {
         if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             throw new RuntimeException("Could not find PlaceholderAPI!!! Plugin can not work without it!");
         }
+        saveDefaultConfig();
         // Register Events
         Bukkit.getPluginManager().registerEvents(new InvPickEvents(), this);
         Bukkit.getPluginManager().registerEvents(new SmeltPickEvents(), this);
         Bukkit.getPluginManager().registerEvents(new LumberEvents(), this);
         Bukkit.getPluginManager().registerEvents(new ExplosiveEvents(), this);
         Bukkit.getPluginManager().registerEvents(new BountifulEvents(), this);
+        Bukkit.getPluginManager().registerEvents(new CustomEvents(), this);
         plugin = this;
     }
 

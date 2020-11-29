@@ -1,3 +1,5 @@
+# Please use sounds from: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+# Please use particles from: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html
 preset-tools:
     inventory:
         lore:
@@ -37,3 +39,19 @@ preset-tools:
             - 'EMERALD_ORE'
             - 'DIAMOND_ORE'
 custom-tools:
+    special:
+        lore:
+            - 'this is a special pick'
+        sound: ENTITY_PLAYER_LEVELUP
+        particle: CRIT_MAGIC
+        command-groups:
+            1:
+                chance: 0.01
+                commands:
+                    - 'msg %player_name% this is a rare event!'
+                    - 'give %player_name% diamond 1'
+            2:
+                chance: 25
+                commands:
+                    - 'msg %player_name% this is not a rare event...'
+                    - 'give %player_name% stone 1'
