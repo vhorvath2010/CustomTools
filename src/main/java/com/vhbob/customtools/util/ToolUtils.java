@@ -1,5 +1,11 @@
 package com.vhbob.customtools.util;
 
+import com.sk89q.worldedit.util.Location;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import com.vhbob.customtools.CustomTools;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -26,6 +32,12 @@ public abstract class ToolUtils {
         if (bonus < 0)
             bonus = 0;
         return bonus;
+    }
+
+    public static boolean enabledFlag(StateFlag flag, Location loc) {
+        RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
+        ApplicableRegionSet set = query.getApplicableRegions(loc);
+        return set.testState(null, flag);
     }
 
 }

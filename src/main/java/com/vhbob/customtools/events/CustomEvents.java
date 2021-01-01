@@ -1,10 +1,10 @@
 package com.vhbob.customtools.events;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.vhbob.customtools.CustomTools;
 import com.vhbob.customtools.util.ToolUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,6 +18,9 @@ public class CustomEvents implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
+        if (!ToolUtils.enabledFlag(CustomTools.getWeirdFlag(), BukkitAdapter.adapt(e.getBlock().getLocation()))) {
+            return;
+        }
         FileConfiguration config = CustomTools.getPlugin().getConfig();
         Player p = e.getPlayer();
         ItemStack hand = p.getInventory().getItemInMainHand();
@@ -29,6 +32,8 @@ public class CustomEvents implements Listener {
                 p.getWorld().spawnParticle(Particle.valueOf(particle), e.getBlock().getLocation(), 3);
                 String sound = config.getString("custom-tools." + tool + ".sound");
                 p.getWorld().playSound(e.getBlock().getLocation(), Sound.valueOf(sound), 1, 1);
+                if (config.getConfigurationSection("custom-tools." + tool + ".command-groups") == null)
+                    return;
                 for (String cmdGroup : config.getConfigurationSection("custom-tools." + tool + ".command-groups").getKeys(false)) {
                     // Try to run commands
                     if (Math.random() * 100 < config.getDouble("custom-tools." + tool + ".command-groups." + cmdGroup + ".chance")) {

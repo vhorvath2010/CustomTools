@@ -1,5 +1,6 @@
 package com.vhbob.customtools.events;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.vhbob.customtools.CustomTools;
 import com.vhbob.customtools.util.ToolUtils;
 import org.bukkit.block.Block;
@@ -12,6 +13,9 @@ public class LumberEvents implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
+        if (!ToolUtils.enabledFlag(CustomTools.getLumberFlag(), BukkitAdapter.adapt(e.getBlock().getLocation()))) {
+            return;
+        }
         if (ToolUtils.checkPick(e.getPlayer().getInventory().getItemInMainHand(), "preset-tools.lumber.lore")) {
             // Find blocks to remove
             int delay_inc = CustomTools.getPlugin().getConfig().getInt("preset-tools.lumber.delay");

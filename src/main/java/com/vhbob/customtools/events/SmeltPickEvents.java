@@ -1,5 +1,6 @@
 package com.vhbob.customtools.events;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.vhbob.customtools.CustomTools;
 import com.vhbob.customtools.util.ToolUtils;
 import org.bukkit.Material;
@@ -13,6 +14,9 @@ public class SmeltPickEvents implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
+        if (!ToolUtils.enabledFlag(CustomTools.getSmeltFlag(), BukkitAdapter.adapt(e.getBlock().getLocation()))) {
+            return;
+        }
         if (ToolUtils.checkPick(e.getPlayer().getInventory().getItemInMainHand(), "preset-tools.smelters.lore")) {
             FileConfiguration config = CustomTools.getPlugin().getConfig();
             ItemStack hand = e.getPlayer().getInventory().getItemInMainHand();

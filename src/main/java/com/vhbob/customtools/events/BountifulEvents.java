@@ -1,7 +1,9 @@
 package com.vhbob.customtools.events;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.vhbob.customtools.CustomTools;
 import com.vhbob.customtools.util.ToolUtils;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,6 +16,9 @@ public class BountifulEvents implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
+        if (!ToolUtils.enabledFlag(CustomTools.getWeirdFlag(), BukkitAdapter.adapt(e.getBlock().getLocation()))) {
+            return;
+        }
         FileConfiguration config = CustomTools.getPlugin().getConfig();
         if (ToolUtils.checkPick(e.getPlayer().getInventory().getItemInMainHand(), "preset-tools.bountiful.lore")) {
             // Check if we broke a trigger block

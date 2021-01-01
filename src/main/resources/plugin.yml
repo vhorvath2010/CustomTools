@@ -1,8 +1,9 @@
 name: CustomTools
-version: 1.0.0
+version: 1.0.2
 author: Vhbob
 description: Adds tons of custom tools to MC
 main: com.vhbob.customtools.CustomTools
 api-version: 1.16
 depend:
   - PlaceholderAPI
+  - WorldGuard
