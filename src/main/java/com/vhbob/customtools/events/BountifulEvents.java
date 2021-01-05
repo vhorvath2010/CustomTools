@@ -16,7 +16,7 @@ public class BountifulEvents implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
-        if (!ToolUtils.enabledFlag(CustomTools.getWeirdFlag(), BukkitAdapter.adapt(e.getBlock().getLocation()))) {
+        if (e.isCancelled() || !ToolUtils.enabledFlag(CustomTools.getWeirdFlag(), BukkitAdapter.adapt(e.getBlock().getLocation()))) {
             return;
         }
         FileConfiguration config = CustomTools.getPlugin().getConfig();

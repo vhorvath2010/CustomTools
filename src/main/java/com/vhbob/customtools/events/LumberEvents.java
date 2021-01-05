@@ -13,7 +13,7 @@ public class LumberEvents implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
-        if (!ToolUtils.enabledFlag(CustomTools.getLumberFlag(), BukkitAdapter.adapt(e.getBlock().getLocation()))) {
+        if (e.isCancelled() || !ToolUtils.enabledFlag(CustomTools.getLumberFlag(), BukkitAdapter.adapt(e.getBlock().getLocation()))) {
             return;
         }
         if (ToolUtils.checkPick(e.getPlayer().getInventory().getItemInMainHand(), "preset-tools.lumber.lore")) {
