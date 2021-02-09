@@ -4,11 +4,15 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.vhbob.customtools.CustomTools;
 import com.vhbob.customtools.util.ToolUtils;
 import org.bukkit.Material;
+import org.bukkit.block.Chest;
+import org.bukkit.block.Container;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
 
 public class SmeltPickEvents implements Listener {
 
@@ -31,6 +35,17 @@ public class SmeltPickEvents implements Listener {
                     }
                     e.getBlock().getWorld().dropItem(e.getBlock().getLocation().add(0.5, 0, 0.5), new ItemStack(dropType, amt));
                 } else {
+                    e.getBlock().getWorld().dropItem(e.getBlock().getLocation().add(0.5, 0, 0.5), item);
+                }
+            }
+            // Drop container items
+            if (e.getBlock().getState() instanceof Container) {
+                ItemStack[] items = ((Container) e.getBlock().getState()).getInventory().getContents();
+                // Special chest case
+                if (e.getBlock().getState() instanceof Chest) {
+                    items = ((Chest) e.getBlock().getState()).getBlockInventory().getContents();
+                }
+                for (ItemStack item : items) {
                     e.getBlock().getWorld().dropItem(e.getBlock().getLocation().add(0.5, 0, 0.5), item);
                 }
             }
