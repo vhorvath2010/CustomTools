@@ -46,7 +46,9 @@ public class SmeltPickEvents implements Listener {
                     items = ((Chest) e.getBlock().getState()).getBlockInventory().getContents();
                 }
                 for (ItemStack item : items) {
-                    e.getBlock().getWorld().dropItem(e.getBlock().getLocation().add(0.5, 0, 0.5), item);
+                    if (item != null) {
+                        e.getBlock().getWorld().dropItem(e.getBlock().getLocation().add(0.5, 0, 0.5), item);
+                    }
                 }
             }
             e.setDropItems(false);
