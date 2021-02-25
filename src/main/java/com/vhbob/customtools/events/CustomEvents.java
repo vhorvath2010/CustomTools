@@ -7,6 +7,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -38,8 +39,8 @@ public class CustomEvents implements Listener {
                         if (!particle.equalsIgnoreCase("none")) {
                             p.getWorld().spawnParticle(Particle.valueOf(particle), e.getBlock().getLocation(), 3);
                         }
-                        if (sound.equalsIgnoreCase("none")) {
-                            p.getWorld().playSound(e.getBlock().getLocation(), Sound.valueOf(sound), 1, 1);
+                        if (!sound.equalsIgnoreCase("none")) {
+                            p.getWorld().playSound(e.getBlock().getLocation(), Sound.valueOf(sound), SoundCategory.RECORDS,1, 1);
                         }
                         for (String cmd : config.getStringList("custom-tools." + tool + ".command-groups." + cmdGroup + ".commands")) {
                             String placedCmd = PlaceholderAPI.setPlaceholders(p, cmd);
