@@ -27,16 +27,20 @@ public class CustomEvents implements Listener {
         // Check for custom tool
         for (String tool : config.getConfigurationSection("custom-tools").getKeys(false)) {
             if (ToolUtils.checkPick(hand, "custom-tools." + tool + ".lore")) {
-                // Play sounds and particles
-                String particle = config.getString("custom-tools." + tool + ".particle");
-                p.getWorld().spawnParticle(Particle.valueOf(particle), e.getBlock().getLocation(), 3);
-                String sound = config.getString("custom-tools." + tool + ".sound");
-                p.getWorld().playSound(e.getBlock().getLocation(), Sound.valueOf(sound), 1, 1);
                 if (config.getConfigurationSection("custom-tools." + tool + ".command-groups") == null)
                     return;
+                String particle = config.getString("custom-tools." + tool + ".particle");
+                String sound = config.getString("custom-tools." + tool + ".sound");
                 for (String cmdGroup : config.getConfigurationSection("custom-tools." + tool + ".command-groups").getKeys(false)) {
                     // Try to run commands
                     if (Math.random() * 100 < config.getDouble("custom-tools." + tool + ".command-groups." + cmdGroup + ".chance")) {
+                        // Play sounds and particles
+                        if (!particle.equalsIgnoreCase("none")) {
+                            p.getWorld().spawnParticle(Particle.valueOf(particle), e.getBlock().getLocation(), 3);
+                        }
+                        if (sound.equalsIgnoreCase("none")) {
+                            p.getWorld().playSound(e.getBlock().getLocation(), Sound.valueOf(sound), 1, 1);
+                        }
                         for (String cmd : config.getStringList("custom-tools." + tool + ".command-groups." + cmdGroup + ".commands")) {
                             String placedCmd = PlaceholderAPI.setPlaceholders(p, cmd);
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), placedCmd);
