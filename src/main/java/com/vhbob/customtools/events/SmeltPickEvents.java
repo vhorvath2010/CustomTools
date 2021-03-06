@@ -6,6 +6,7 @@ import com.vhbob.customtools.util.ToolUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Container;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,7 +40,7 @@ public class SmeltPickEvents implements Listener {
                 }
             }
             // Drop container items
-            if (e.getBlock().getState() instanceof Container) {
+            if (e.getBlock().getState() instanceof Container && !(e.getBlock().getState() instanceof ShulkerBox)) {
                 ItemStack[] items = ((Container) e.getBlock().getState()).getInventory().getContents();
                 // Special chest case
                 if (e.getBlock().getState() instanceof Chest) {
